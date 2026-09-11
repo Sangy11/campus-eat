@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+# campus-eat
+
+>>>>>>> 52867db5c19d855452087a59568e1136f2762a4a
 campus-eats/ \
 ├── config/                    (data layer support — DB connection, next lab) \
 ├── controllers/
