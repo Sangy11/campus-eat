@@ -14,6 +14,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Routes
 const indexRoutes = require('./routes/index');
@@ -28,3 +29,5 @@ app.get('/db-test', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Campus Eats running at http://localhost:${PORT}`);
 });
+const apiRoutes = require('./routes/api');
+app.use('/api', apiRoutes);
