@@ -9,11 +9,15 @@ const orderController = require('../controllers/orderController');
 const authController = require('../controllers/authController');
 const adminController = require('../controllers/adminController');
 const superAdminController = require('../controllers/superAdminController');
+const feedbackController = require('../controllers/feedbackController');
 
 // Public pages
 router.get('/', homeController.getHome);
 router.get('/about', aboutController.getAbout);
 router.get('/restaurants/:id/menu', menuController.getMenuByRestaurant);
+
+// Feedback (public, no login needed)
+router.post('/restaurants/:id/feedback', feedbackController.submitFeedback);
 
 // Orders (creating one needs login)
 router.post('/orders', requireAuth, orderController.createOrder);
