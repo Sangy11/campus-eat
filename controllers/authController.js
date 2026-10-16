@@ -103,4 +103,22 @@ exports.resetPassword = async (req, res) => {
   await User.resetPassword(user.id, password);
   res.redirect('/login');
 };
+const { isValidSherubtseEmail, EMAIL_SUFFIX } = require('../utils/validators');
+
+// inside exports.signup, replace the old check:
+if (!isValidSherubtseEmail(email)) {
+  return res.render('signup', {
+    title: 'Sign Up',
+    error: `Please use your Sherubtse College email, ending in ${EMAIL_SUFFIX}.`,
+  });
+}
+const { isValidSherubtseEmail, EMAIL_SUFFIX } = require('../utils/validators');
+
+// inside exports.signup, replace the old check:
+if (!isValidSherubtseEmail(email)) {
+  return res.render('signup', {
+    title: 'Sign Up',
+    error: `Please use your Sherubtse College email, ending in ${EMAIL_SUFFIX}.`,
+  });
+}
 
