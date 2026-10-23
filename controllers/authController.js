@@ -1,8 +1,7 @@
 const crypto = require('crypto');
 const User = require('../models/User');
 const { sendVerificationEmail, sendPasswordResetEmail } = require('../config/mailer');
-
-const EMAIL_SUFFIX = '.sherubtse@rub.edu.bt';
+const { isValidSherubtseEmail, EMAIL_SUFFIX } = require('../utils/validators');
 
 exports.showSignup = (req, res) => res.render('signup', { title: 'Sign Up', error: null });
 
@@ -13,7 +12,7 @@ exports.signup = async (req, res) => {
     return res.render('signup', { title: 'Sign Up', error: 'All fields are required.' });
   }
 
-  if (!email.toLowerCase().endsWith(EMAIL_SUFFIX)) {
+  if (!isValidSherubtseEmail(email)) {
     return res.render('signup', {
       title: 'Sign Up',
       error: `Please use your Sherubtse College email, ending in ${EMAIL_SUFFIX}.`,
@@ -31,11 +30,13 @@ exports.signup = async (req, res) => {
 
   res.render('signup-success', { title: 'Check Your Email', email });
 };
+
 exports.verifyEmail = async (req, res) => {
   const user = await User.markVerified(req.params.token);
   if (!user) return res.status(400).send('Invalid or expired verification link.');
   res.render('verify-success', { title: 'Verified', user });
 };
+
 exports.showLogin = (req, res) => res.render('login', { title: 'Log In', error: null });
 
 exports.login = async (req, res) => {
@@ -103,22 +104,3 @@ exports.resetPassword = async (req, res) => {
   await User.resetPassword(user.id, password);
   res.redirect('/login');
 };
-const { isValidSherubtseEmail, EMAIL_SUFFIX } = require('../utils/validators');
-
-// inside exports.signup, replace the old check:
-if (!isValidSherubtseEmail(email)) {
-  return res.render('signup', {
-    title: 'Sign Up',
-    error: `Please use your Sherubtse College email, ending in ${EMAIL_SUFFIX}.`,
-  });
-}
-const { isValidSherubtseEmail, EMAIL_SUFFIX } = require('../utils/validators');
-
-// inside exports.signup, replace the old check:
-if (!isValidSherubtseEmail(email)) {
-  return res.render('signup', {
-    title: 'Sign Up',
-    error: `Please use your Sherubtse College email, ending in ${EMAIL_SUFFIX}.`,
-  });
-}
-

@@ -2,10 +2,11 @@ const express = require('express');
 const path = require('path');
 const session = require('express-session');
 const dotenv = require('dotenv');
+const { connectMongo } = require('./config/mongo');
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+
 if (process.env.NODE_ENV !== 'test') {
   connectMongo().catch(err => console.error('MongoDB connection failed:', err));
 }

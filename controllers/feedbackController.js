@@ -1,6 +1,6 @@
 const Feedback = require('../models/Feedback');
 const Restaurant = require('../models/Restaurant');
-const feedbackController = require('../controllers/feedbackController');
+
 exports.submitFeedback = async (req, res) => {
   const restaurantId = req.params.id;
   const restaurant = await Restaurant.getRestaurantById(restaurantId);

@@ -25,12 +25,5 @@ function requireAuthApi(req, res, next) {
   }
   next();
 }
-module.exports = { requireAuth, requireAdmin, requireSuperAdmin, requireAuthApi };
-function requireAuthApi(req, res, next) {
-  if (!req.session.user) {
-    return res.status(401).json({ error: 'You must be logged in to place an order.' });
-  }
-  next();
-}
 
-module.exports.requireAuthApi = requireAuthApi;
+module.exports = { requireAuth, requireAdmin, requireSuperAdmin, requireAuthApi };
